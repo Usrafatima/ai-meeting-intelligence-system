@@ -1,13 +1,30 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.core.config import settings
+from app.api.api import api_router
+from app.db.database import engine, Base
+import app.db.models  # noqa
+
+from contextlib import asynccontextmanager
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Create database tables
+    try:
+        Base.metadata.create_all(bind=engine)
+    except Exception as e:
+        print(f"Error creating tables: {e}")
+    yield
+
 app = FastAPI(
-    title="AI Meeting Intelligence System API",
+    title=settings.PROJECT_NAME,
     description="Backend API for AI Meeting Intelligence System",
     version="0.1.0",
+    lifespan=lifespan,
 )
 
-# CORS middleware configuration placeholder
+# CORS middleware configuration
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -15,6 +32,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(api_router, prefix=settings.API_V1_STR)
 
 
 @app.get("/")
