@@ -124,21 +124,8 @@ meeting-intelligence-system/
 
 This repository is currently in the **initial setup phase**. The base project scaffold, directory structure, environment templates, and container configurations have been initialized. Application functionality will be implemented module by module according to the planned roadmap.
 
----
 
-## Future Features
 
-* Real-time meeting transcription and live note-taking.
-* Automated calendar integrations (Google Calendar, Microsoft Outlook).
-* Webhook notifications and integrations (Slack, Jira, Trello, Notion).
-* Multi-language support and automated translation.
-* Custom AI prompt templates tailored to different meeting types (e.g., 1-on-1s, Sprint Retrospectives, Board Meetings).
 
 ---
 
-## Team Development
-
-Development will be organized systematically around the 8 core modules. Contributors should:
-* Create dedicated feature branches (`feature/<module-name>-<feature>`) from `main`.
-* Ensure code quality, linting, and tests pass before opening a Pull Request.
-* Conduct peer code reviews prior to merging into `main`.
