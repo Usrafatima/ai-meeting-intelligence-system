@@ -58,3 +58,7 @@ ENV/
 # Docker & Logs
 *.log
 docker-volumes/
+
+# Uploaded meeting recordings (local storage backend)
+backend/uploads/
+uploads/
