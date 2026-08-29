@@ -1,9 +1,14 @@
 import { Badge } from "@/components/ui/badge";
-import type { MeetingStatus } from "@/lib/mock-data";
 
-const statusMap: Record<MeetingStatus, { label: string; variant: "success" | "warning" | "destructive" }> = {
-  completed: { label: "Completed", variant: "success" },
+type MeetingStatus = "uploaded" | "queued" | "processing" | "transcribed" | "analyzed" | "completed" | "failed";
+
+const statusMap: Record<MeetingStatus, { label: string; variant: "success" | "warning" | "destructive" | "muted" }> = {
+  uploaded: { label: "Uploaded", variant: "muted" },
+  queued: { label: "Queued", variant: "muted" },
   processing: { label: "Processing", variant: "warning" },
+  transcribed: { label: "Transcribed", variant: "muted" },
+  analyzed: { label: "Analyzed", variant: "muted" },
+  completed: { label: "Completed", variant: "success" },
   failed: { label: "Failed", variant: "destructive" },
 };
 

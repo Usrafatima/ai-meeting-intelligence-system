@@ -7,6 +7,7 @@ import { Loader2 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { signup } from "@/lib/api";
 
 export default function SignupPage() {
   const router = useRouter();
@@ -16,7 +17,7 @@ export default function SignupPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setError("");
 
@@ -30,10 +31,16 @@ export default function SignupPage() {
     }
 
     setLoading(true);
-    // TODO: replace with real POST /api/auth/signup call once the backend is ready.
-    setTimeout(() => {
-      router.push("/upload");
-    }, 500);
+    setError("");
+
+    try {
+      await signup({ name, email, password });
+      router.push("/dashboard");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Signup failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -50,10 +57,11 @@ export default function SignupPage() {
             <Input
               id="name"
               type="text"
-              placeholder="Inza Iqbal"
+              placeholder="Your Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
               disabled={loading}
+              required
             />
           </div>
           <div className="space-y-1.5">
@@ -67,6 +75,7 @@ export default function SignupPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               disabled={loading}
+              required
             />
           </div>
           <div className="space-y-1.5">
@@ -80,6 +89,8 @@ export default function SignupPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               disabled={loading}
+              required
+              minLength={6}
             />
           </div>
           {error && <p className="text-sm text-destructive">{error}</p>}

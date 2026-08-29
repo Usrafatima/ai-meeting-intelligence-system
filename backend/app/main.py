@@ -5,6 +5,7 @@ from app.core.config import settings
 from app.api.api import api_router
 from app.db.database import engine, Base
 import app.db.models  # noqa
+import app.db.models_stt  # noqa - STT models for transcript/speaker diarization
 
 from contextlib import asynccontextmanager
 

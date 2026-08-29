@@ -7,6 +7,7 @@ import { Loader2 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { login } from "@/lib/api";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -15,7 +16,7 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setError("");
 
@@ -25,10 +26,16 @@ export default function LoginPage() {
     }
 
     setLoading(true);
-    // TODO: replace with real POST /api/auth/login call once the backend is ready.
-    setTimeout(() => {
-      router.push("/upload");
-    }, 500);
+    setError("");
+
+    try {
+      await login({ email, password });
+      router.push("/dashboard");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Login failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -49,6 +56,7 @@ export default function LoginPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               disabled={loading}
+              required
             />
           </div>
           <div className="space-y-1.5">
@@ -62,6 +70,7 @@ export default function LoginPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               disabled={loading}
+              required
             />
           </div>
           {error && <p className="text-sm text-destructive">{error}</p>}

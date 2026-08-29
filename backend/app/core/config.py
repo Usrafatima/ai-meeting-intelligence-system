@@ -31,6 +31,12 @@ class Settings(BaseSettings):
     # send as x-service-key when calling the internal endpoints.
     PIPELINE_SERVICE_KEY: str = "change-me-in-env"
 
+    # Speech-to-Text Configuration
+    GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "")
+    STT_MODEL_PROVIDER: str = os.getenv("STT_MODEL_PROVIDER", "gemini")  # "gemini" or "whisper"
+    WHISPER_MODEL_SIZE: str = os.getenv("WHISPER_MODEL_SIZE", "base")
+    HUGGINGFACE_TOKEN: str = os.getenv("HUGGINGFACE_TOKEN", "")
+
     @property
     def MAX_UPLOAD_SIZE_BYTES(self) -> int:
         return self.MAX_UPLOAD_SIZE_MB * 1024 * 1024
