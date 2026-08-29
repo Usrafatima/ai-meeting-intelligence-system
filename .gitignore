@@ -1,6 +1,40 @@
-node_modules/
+# =========================
+# Frontend
+# =========================
+frontend/.next/
+frontend/node_modules/
+
+# =========================
+# Backend / Python
+# =========================
+backend/__pycache__/
+backend/**/__pycache__/
+backend/.pytest_cache/
+backend/.mypy_cache/
+backend/.ruff_cache/
+backend/*.pyc
+backend/**/*.pyc
+backend/.venv/
+backend/venv/
+backend/env/
+
+# =========================
+# Environment variables
+# =========================
 .env
-.next/
+.env.local
+.env.*.local
+.env.example
+backend/.env
+backend/.env.example
+frontend/.env
+frontend/.env.*
+
+
+# =========================
+# General
+# =========================
+node_modules/
 dist/
 build/
 *.log
