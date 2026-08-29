@@ -48,7 +48,12 @@ class LocalStorageBackend(StorageBackend):
                 sha256.update(chunk)
                 size_bytes += len(chunk)
 
-        return str(destination), size_bytes, sha256.hexdigest()
+        # Return relative path so it works regardless of where the app runs
+        try:
+            rel_path = destination.relative_to(self.base_dir)
+        except ValueError:
+            rel_path = Path(meeting_id) / stored_name
+        return str(rel_path), size_bytes, sha256.hexdigest()
 
     def delete(self, storage_path: str) -> None:
         try:

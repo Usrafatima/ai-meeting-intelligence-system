@@ -1,4 +1,4 @@
-export type MeetingStatus = "processing" | "completed" | "failed";
+export type MeetingStatus = "uploaded" | "queued" | "processing" | "transcribed" | "analyzed" | "completed" | "failed";
 
 export interface ActionItem {
   task: string;
