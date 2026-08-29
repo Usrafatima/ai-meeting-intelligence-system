@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 222 20% 12%;
+
+  --card: 0 0% 100%;
+  --card-foreground: 222 20% 12%;
+
+  --border: 220 14% 91%;
+
+  --muted: 220 20% 96%;
+  --muted-foreground: 220 9% 46%;
+
+  --primary: 245 58% 51%;
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: 220 20% 96%;
+  --secondary-foreground: 222 20% 12%;
+
+  --success: 152 60% 36%;
+  --success-foreground: 0 0% 100%;
+
+  --warning: 32 90% 50%;
+  --warning-foreground: 0 0% 100%;
+
+  --destructive: 0 72% 51%;
+  --destructive-foreground: 0 0% 100%;
+
+  --radius: 0.75rem;
+  --font-sans: "Inter", system-ui, sans-serif;
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+body {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: var(--font-sans);
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-left {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-16px) scale(1.04);
+  }
+}
