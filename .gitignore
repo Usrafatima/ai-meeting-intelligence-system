@@ -24,9 +24,7 @@ backend/env/
 .env
 .env.local
 .env.*.local
-.env.example
 backend/.env
-backend/.env.example
 frontend/.env
 frontend/.env.*
 
