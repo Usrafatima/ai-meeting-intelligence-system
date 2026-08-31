@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 
 from app.api.routes import auth, users, meetings, internal, stt, meeting_intelligence
+from app.api.routes import meeting_details
 
 api_router = APIRouter()
 api_router.include_router(auth.router, prefix="/auth", tags=["auth"])
@@ -9,3 +10,6 @@ api_router.include_router(meetings.router, prefix="/meetings", tags=["meetings"]
 api_router.include_router(internal.router, prefix="/internal", tags=["internal"])
 api_router.include_router(stt.router, prefix="/stt", tags=["stt"])
 api_router.include_router(meeting_intelligence.router, prefix="/meeting-intelligence", tags=["meeting-intelligence"])
+# Module 6 - Dashboard & Meeting Details.
+# Registered after meetings so module 3's own /meetings routes keep priority.
+api_router.include_router(meeting_details.router, prefix="/meetings", tags=["meeting-details"])
